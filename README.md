@@ -124,6 +124,8 @@ You can also use docker to run the service isolated from your system. We provide
 docker compose up
 ```
 
+You can also build the image directly on your target machine by uncommenting the `build` option (and suboptions) from the provided `docker-compose.yml` file and do a `docker compose build` first.
+
 ## How does it work
 
 ### Default configuration
@@ -146,4 +148,4 @@ After running the service, the `config.yml` file will contain all default values
 
 ### Copyright and license
 
-Copyright (c) 2022 RAKwireless, under MIT License.
+Copyright (c) 2023 RAKwireless, under MIT License.
