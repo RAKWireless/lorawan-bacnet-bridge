@@ -1,0 +1,4 @@
+.venv
+config
+dist
+build_private.sh

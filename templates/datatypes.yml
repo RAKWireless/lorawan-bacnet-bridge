@@ -1,0 +1,154 @@
+datatypes:
+  0:
+    name: digital_in
+    type: BinaryInputObject
+  1:
+    name: digital_out
+    type: BinaryOutputObject
+  2:
+    name: analog_in
+    type: AnalogInputObject
+  3:
+    name: analog_out
+    type: AnalogOutputObject
+  100:
+    name: generic
+    type: AnalogValueObject
+  101:
+    name: illuminance
+    type: AnalogInputObject
+    units: luxes
+  102:
+    name: presence
+    type: BinaryInputObject
+  103:
+    name: temperature
+    type: AnalogInputObject
+    units: degreesCelsius
+  104:
+    name: humidity
+    type: AnalogInputObject
+    units: percentRelativeHumidity
+  112:
+    name: humidity
+    type: AnalogInputObject
+    units: percentRelativeHumidity
+  113:
+    name: accelerometer
+    type: AnalogInputObject
+  115:
+    name: barometer
+    type: AnalogInputObject
+    units: hectopascals
+  116:
+    name: voltage
+    type: AnalogInputObject
+    units: volts
+  117:
+    name: current
+    type: AnalogInputObject
+    units: amperes
+  118:
+    name: frequency
+    type: AnalogInputObject
+    units: hertz
+  120:
+    name: percentage
+    type: AnalogInputObject
+    units: percent
+  121:
+    name: altitude
+    type: AnalogInputObject
+    units: meters
+  125:
+    name: concentration
+    type: AnalogInputObject
+    units: partsPerMillion
+  128:
+    name: power
+    type: AnalogInputObject
+    units: watts
+  130:
+    name: distance
+    type: AnalogInputObject
+    units: meters
+  131:
+    name: energy
+    type: AnalogInputObject
+    units: kilowattHours
+  132:
+    name: direction
+    type: AnalogInputObject
+    units: degreesAngular
+  133:
+    name: time
+    type: AnalogInputObject
+    units: seconds
+  134:
+    name: gyrometer
+    type: AnalogInputObject
+    units: radiansPerSecond
+  135:
+    name: colour
+    type: AnalogInputObject
+  136:
+    name: gps
+    type: AnalogInputObject
+    units: degreesAngular
+  137:
+    name: gps
+    type: AnalogInputObject
+    units: degreesAngular
+  138:
+    name: voc
+    type: AnalogInputObject
+    units: partsPerMillion
+  142:
+    name: switch
+    type: BinaryInputObject
+  188:
+    name: soil_moist
+    type: AnalogInputObject
+    units: percent
+  190:
+    name: wind_speed
+    type: AnalogInputObject
+    units: metersPerSecond
+  191:
+    name: wind_direction
+    type: AnalogInputObject
+    units: degreesAngular
+  192:
+    name: soil_ec
+    type: AnalogInputObject
+    units: millisiemens
+  193:
+    name: soil_ph_h
+    type: AnalogInputObject
+    units: pH
+  194:
+    name: soil_ph_l
+    type: AnalogInputObject
+    units: pH
+  195:
+    name: pyranometer
+    type: AnalogInputObject
+    units: wattsPerSquareMeter
+  200:
+    name: tilt
+    type: AnalogInputObject
+    units: degreesAngular
+  203:
+    name: light
+    type: AnalogInputObject
+    units: luxes
+  250:
+    name: db
+    type: AnalogInputObject
+    units: decibels
+  254:
+    name: text
+    type: CharacterStringValueObject
+  255:
+    name: bytes
+    type: BitStringValueObject

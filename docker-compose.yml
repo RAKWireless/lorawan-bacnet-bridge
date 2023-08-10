@@ -1,0 +1,26 @@
+version: '2.0'
+
+services:
+
+  lorawan-bacnet-bridge:
+    
+    image: rakwireless/lorawan-bacnet-bridge
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
+    
+    container_name: lorawan-bacnet-bridge
+    restart: unless-stopped
+    network_mode: host
+
+    # Either mount the configuration file
+    volumes:
+      - ./config:/app/config
+
+    # Or use environment variables to configure the service
+    #environment:
+    #  MQTT_SERVER: eu1.cloud.thethings.network
+    #  MQTT_PORT: 1883
+    #  MQTT_USERNAME: my-app@ttn
+    #  MQTT_PASSWORD: NNSXS.UTGKWB.........UPQ
+    #  BACNET_IP: 192.168.1.162
