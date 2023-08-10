@@ -5,19 +5,21 @@ services:
   lorawan-bacnet-bridge:
     
     image: rakwireless/lorawan-bacnet-bridge
+    container_name: lorawan-bacnet-bridge
+    restart: unless-stopped
+    network_mode: host
+    
+    # Uncomment the following lines to build the docker image locally by using `docker compose build`
     #build:
     #  context: .
     #  dockerfile: Dockerfile
     
-    container_name: lorawan-bacnet-bridge
-    restart: unless-stopped
-    network_mode: host
-
-    # Either mount the configuration file
+    # Mount the configuration folder to persist changes accross container reboots
     volumes:
       - ./config:/app/config
 
-    # Or use environment variables to configure the service
+    # You can either configure the service using a config.yml file inside the configuration folder
+    # or use environment variables here (check the README)
     #environment:
     #  MQTT_SERVER: eu1.cloud.thethings.network
     #  MQTT_PORT: 1883
