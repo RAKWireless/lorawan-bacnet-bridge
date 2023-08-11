@@ -413,7 +413,7 @@ if __name__ == "__main__":
         def mqtt_message_callback(client, userdata, msg):
             update_objects(userdata, msg)
         mqtt_client = MQTTClient(
-            config.get('mqtt.server', 'locahost'),
+            config.get('mqtt.server', 'localhost'),
             int(config.get('mqtt.port', 1883)),
             config.get('mqtt.username'),
             config.get('mqtt.password'),
@@ -422,7 +422,7 @@ if __name__ == "__main__":
         mqtt_client.subscribe(config.get('mqtt.topic', 'v3/+/devices/+/up'))
         mqtt_client.on_message = mqtt_message_callback
     except:
-        logging.error(f"[MQTT] Error connecting to MQTT server at {config.get('mqtt.server', 'locahost')}:{config.get('mqtt.port', 1883)}")
+        logging.error(f"[MQTT] Error connecting to MQTT server at {config.get('mqtt.server', 'localhost')}:{config.get('mqtt.port', 1883)}")
         run = False
 
     # Load default datatypes
