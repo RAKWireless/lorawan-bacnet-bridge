@@ -19,6 +19,13 @@ from BAC0.core.devices.local.models import ObjectFactory
 from bacpypes.object import BinaryInputObject, BinaryOutputObject, AnalogInputObject, AnalogOutputObject, AnalogValueObject
 
 # -----------------------------------------------------------------------------
+# Globals
+# -----------------------------------------------------------------------------
+
+APP_NAME = "LoRaWAN to BACnet Bridge"
+APP_VERSION = "v1.0.0"
+
+# -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
 
@@ -393,6 +400,7 @@ if __name__ == "__main__":
     # Set logging level based on settings (10=DEBUG, 20=INFO, ...)
     level=config.get("logging.level", logging.INFO)
     logging.basicConfig(format='[%(asctime)s] %(message)s', level=level)
+    logging.info(f"[MAIN] {APP_NAME} {APP_VERSION}")
     logging.debug(f"[MAIN] Setting logging level to {level}")
 
     # BACnet setup
