@@ -14,6 +14,8 @@ The service gets the configuration information from a `config.yml` file in the `
 |bacnet.ip|BACNET_IP|IP of the local devices publishing the BACnet objects|LAN IP|
 |bacnet.port|BACNET_PORT|Port to listen to connections|47808|
 |bacnet.mask|BACNET_MASK|IP mask to accepts whois queries from|24|
+|bacnet.name|BACNET_NAME|Name of the device|LBB|
+|bacnet.id|BACNET_ID|ID of the device|0x200001|
 |mqtt.server|MQTT_SERVER|IP or hostname of the MQTT broker to connect to|localhost|
 |mqtt.port|MQTT_PORT|Port of the MQTT server|1883|
 |mqtt.username|MQTT_USERNAME|Username to use in the MQTT connection||
@@ -23,6 +25,7 @@ The service gets the configuration information from a `config.yml` file in the `
 |datatypes.filename|DATATYPES_FILENAME|Default datatypes definition file|`datatypes.yml`|
 |devices.\<device\>.decode||Force decoding payload instead of using existing decoded payload if any|True|
 |devices.\<device\>.decoder||Decoder to use for the specific device_id (see decoders folder)|`cayenne.js`|
+|devices.\<device\>.objects.\<name\>.id||BACnet object ID||
 |devices.\<device\>.objects.\<name\>.type||BACnet object type||
 |devices.\<device\>.objects.\<name\>.name||BACnet object name||
 |devices.\<device\>.objects.\<name\>.value||BACnet object last value||
@@ -59,6 +62,8 @@ bacnet:
   ip: 192.168.1.132
   mask: 24
   port: 47808
+  name: LBB
+  id: 2097153
 datatypes:
   filename: datatypes.yml
 devices:
@@ -67,26 +72,31 @@ devices:
     decoder: cayenne.js
     objects:
       field-001-temperature:
+        id: 1
         name: wisblock-01-field-001-temperature
         type: AnalogInputObject
         units: degreesCelsius
         value: 24.3
       field-002-humidity:
+        id: 2
         name: wisblock-01-field-002-humidity
         type: AnalogInputObject
         units: percentRelativeHumidity
         value: 49
       field-003-barometer:
+        id: 3
         name: wisblock-01-field-003-barometer
         type: AnalogInputObject
         units: hectopascals
         value: 988.8
       rssi:
+        id: 4
         name: wisblock-01-rssi
         type: AnalogInputObject
         units: decibels
         value: -53
       snr:
+        id: 5
         name: wisblock-01-snr
         type: AnalogInputObject
         units: decibels
@@ -148,4 +158,4 @@ After running the service, the `config.yml` file will contain all default values
 
 ### Copyright and license
 
-Copyright (c) 2023 RAKwireless, under MIT License.
+Copyright (c) 2023-2024 RAKwireless, under MIT License.
