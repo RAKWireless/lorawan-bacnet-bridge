@@ -130,7 +130,7 @@ class MQTTClient(Client):
 
 class BACnetApp():
 
-    id = 0
+    id = 1
     
     def __init__(self):
         self.objects = None
@@ -143,19 +143,22 @@ class BACnetApp():
         self.device._log.setLevel(level)
         self.device._update_local_cov_task.task._log.setLevel(level)
 
-    def add_object(self, type, name, description, value, units):
+    def add_object(self, type, name, description, value, units, id=0):
+        if 0 == id:
+            id = self.id
+            self.id += 1
         self.objects = ObjectFactory(
-            type, self.id, name, 
+            type, id, name, 
             properties = {"units": units},
             description = description,
             presentValue = value
         )
-        self.id += 1
+        return id
 
     def clear_objects(self):
         if self.objects:
             self.objects.clear_objects()
-        self.id = 0
+        self.id = 1
 
     def list(self):
         for obj in self.device.this_application.iter_objects():
@@ -260,6 +263,7 @@ def load_bacnet_devices():
             logging.debug(f"[BACNET] Loading {name}")
             bacnet_app.add_object(
                 type = globals()[obj.get("type", "AnalogInputObject")],
+                id = int(obj.get('id', 0)),
                 name = name,
                 description= "",
                 value = obj.get("value", 0),
@@ -316,6 +320,7 @@ def update_object(device, device_id, element):
             
             # Add object to configuration
             config.set(f"devices.{device_id}.objects.{name}.type", bacnet_type)
+            config.set(f"devices.{device_id}.objects.{name}.id", object_id)
             config.set(f"devices.{device_id}.objects.{name}.name", object_name)
             config.set(f"devices.{device_id}.objects.{name}.units", bacnet_units)
             config.set(f"devices.{device_id}.objects.{name}.value", value)
