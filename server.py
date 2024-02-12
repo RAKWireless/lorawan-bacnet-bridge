@@ -136,8 +136,8 @@ class BACnetApp():
         self.objects = None
         self.device = None
 
-    def create_device(self, ip=None, port=None, mask=24, **params):
-        self.device = BAC0.lite(ip=ip, port=port, mask=mask, **params)
+    def create_device(self, ip=None, port=None, mask=24, name='BAC0', id=None, **params):
+        self.device = BAC0.lite(ip=ip, port=port, mask=mask, localObjName=name, deviceId=id, **params)
 
     def setLoggingLevel(self, level):
         self.device._log.setLevel(level)
@@ -285,19 +285,19 @@ def update_object(device, device_id, element):
             save |= update_object(device, device_id, sub_element)
         return save
     
-    object_id = f"{device_id}-{name}"
+    object_name = f"{device_id}-{name}"
 
     try:
         
         # Update the BACnet object value
-        device[object_id].presentValue = value
+        device[object_name].presentValue = value
         
         # We are updating the current value but not saving it to disk just yet (lazysaving)
         config.set(f"devices.{device_id}.objects.{name}.value", value)
     
     except:
         
-        logging.debug(f"[BACNET] Object {object_id} not found, creating it")
+        logging.debug(f"[BACNET] Object {object_name} not found, creating it")
         
         if datatype in datatypes:
 
@@ -305,20 +305,20 @@ def update_object(device, device_id, element):
             bacnet_type = datatypes[datatype].get('type')
             bacnet_units = datatypes[datatype].get('units', 'noUnits')
             
-            # Add object to configuration
-            config.set(f"devices.{device_id}.objects.{name}.type", bacnet_type)
-            config.set(f"devices.{device_id}.objects.{name}.name", object_id)
-            config.set(f"devices.{device_id}.objects.{name}.units", bacnet_units)
-            config.set(f"devices.{device_id}.objects.{name}.value", value)
-
-            # Add it also to banet app
-            bacnet_app.add_object(
+            # Add it to bacnet app
+            object_id = bacnet_app.add_object(
                 type = globals()[bacnet_type],
-                name = object_id,
+                name = object_name,
                 description = name,
                 value = value,
                 units = bacnet_units
             )
+            
+            # Add object to configuration
+            config.set(f"devices.{device_id}.objects.{name}.type", bacnet_type)
+            config.set(f"devices.{device_id}.objects.{name}.name", object_name)
+            config.set(f"devices.{device_id}.objects.{name}.units", bacnet_units)
+            config.set(f"devices.{device_id}.objects.{name}.value", value)
 
             # Flag to save & reload objects
             save = True
@@ -409,7 +409,9 @@ if __name__ == "__main__":
         bacnet_app.create_device(
             ip=config.get('bacnet.ip', get_ip()), 
             port=config.get('bacnet.port', 47808), 
-            mask=config.get('bacnet.mask', 24)
+            mask=config.get('bacnet.mask', 24),
+            name=config.get('bacnet.name', "LBB"),
+            id=config.get('bacnet.id', 0x200001),
         )
         load_bacnet_devices()
     except:
