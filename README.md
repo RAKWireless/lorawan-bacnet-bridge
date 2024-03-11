@@ -146,7 +146,7 @@ The `config.yml` file is populated with defaults on each run (does not overwrite
 
 ### Device discovery
 
-The LoRaWAN to BACnet Bridge listens to messages from the LNS sent via MQTT. Currently, it understands The Things Stack v2 (TTN/TTI) and ChirpStack v3 and v4 payloads.
+The LoRaWAN to BACnet Bridge listens to messages from the LNS sent via MQTT. Currently, it understands The Things Stack v3 (TTN/TTI) and ChirpStack v3 and v4 payloads.
 
 Similar to what different LNS do, the service decodes the raw payload using Javascript decoders in the `decoders` folder (alternatively you can set it to use the pre-decoded object from the LNS). Either way it expects a cayenne-like output to map new magnitudes from different sensors to BACnet objects. 
 
