@@ -21,8 +21,8 @@ services:
     # You can either configure the service using a config.yml file inside the configuration folder
     # or use environment variables here (check the README)
     #environment:
-    #  MQTT_SERVER: eu1.cloud.thethings.network
-    #  MQTT_PORT: 1883
-    #  MQTT_USERNAME: my-app@ttn
-    #  MQTT_PASSWORD: NNSXS.UTGKWB.........UPQ
-    #  BACNET_IP: 192.168.1.162
+    #  - MQTT_SERVER=eu1.cloud.thethings.network
+    #  - MQTT_PORT=1883
+    #  - MQTT_USERNAME=my-app@ttn
+    #  - MQTT_PASSWORD=NNSXS.UTGKWB.........UPQ
+    #  - BACNET_IP=192.168.1.162
